@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GastosApp</title>
     <link rel="stylesheet" href="css/app.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,53 +14,37 @@
 <body>
 <div id="app" class="container">
   <div class="row">
-
     <div class="col-12 d-flex justify-content-center my-5">
-      <h1>Gastos personales</h1>
+      <h1 class="fw-900">Gastos personales</h1>
     </div>
 
-    <div class="col-12 d-flex justify-content-end">
-      <h3><span class="badge bg-primary">Total de Gastos: <strong>${{ totalAmount }}</strong></span></h3>
+    <div class="col-6 my-2 d-flex align-items-center justify-content-start">
+      <button class="card-link btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarGasto">
+        <?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff"><path d="M8 12h4m4 0h-4m0 0V8m0 4v4M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        Agregar gasto</button>
     </div>
 
-    <div class="col-12 col-md-4 col-lg-3">
-      <h1>Agregar gasto</h1>
-      <form @submit.prevent="addExpense">
-        <div class="form-floating mb-3">
-          <input type="text" id="floatingInput" class="form-control" v-model="newExpense.type" required>
-          <label for="floatingInput">Tipo:</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="number" id="amount" class="form-control" v-model="newExpense.amount" required>
-          <label for="amount">Monto:</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="text" id="description" class="form-control" v-model="newExpense.description">
-          <label for="description">Descripción:</label>
-        </div>
-        <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-success">Agregar</button>
-        </div>
-      </form>
+    <div class="col-6 my-2 d-flex align-items-center justify-content-end">
+      <h3><span class="badge bg-primary total">Total: <strong>${{ totalAmount }}</strong></span></h3>
     </div>
 
-    <div class="col-12 col-md-8 col-lg-9">
+    <div class="col-12">
       <div class="row d-flex justify-content-center">
-        <div class="col-8 col-md-6 col-xxl-4 p-3" v-for="expense in expenses">
-          <div class="card shadow p-3 bg-body rounded w-100">
+        <div class="col-11 col-md-5 col-xxl-4 p-3" v-for="expense in expenses">
+          <div class="card shadow p-3 bg-body rounded-4 w-100">
             <div class="card-body">
-              <h5 class="card-title">Tipo: <strong>{{ expense.type }}</strong></h5>
-              <p class="card-text">Descripción: {{ expense.description }}</p>
+              <h5 class="card-title fw-700">{{ expense.type }}</h5>
+              <p class="card-text fw-200">{{ expense.description }}</p>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <div class="row">
-                  <div class="col-6">Monto: ${{ expense.amount }}</div>
-                  <div class="col-6">Fecha: {{ expense.date }}</div>
+                  <div class="col-6"><p class="fw-200">Monto: ${{ expense.amount }}</p></div>
+                  <div class="col-6"><p class="fw-200">Fecha: {{ expense.date }}</p></div>
                 </div>
               </li>
             </ul>
-            <div class="card-body">
+            <div class="card-body d-flex justify-content-center">
               <button @click="editExpense(expense)" class="card-link btn btn-warning" type="button" data-bs-toggle="modal" data-bs-target="#modalEditarGasto">
                 <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff">
                   <path d="M14.363 5.652l1.48-1.48a2 2 0 012.829 0l1.414 1.414a2 2 0 010 2.828l-1.48 1.48m-4.243-4.242l-9.616 9.615a2 2 0 00-.578 1.238l-.242 2.74a1 1 0 001.084 1.085l2.74-.242a2 2 0 001.24-.578l9.615-9.616m-4.243-4.242l4.243 4.242" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -78,8 +62,38 @@
         </div>
       </div>
     </div>
-
-
+  </div>
+</div>
+<!-- Modal Agregar Gasto -->
+<div class="modal fade" id="modalAgregarGasto" tabindex="-1" aria-labelledby="modalAgregarGastoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="modalAgregarGastoLabel">Agregar gasto</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="addExpense">
+          <div class="form-floating mb-3">
+            <input type="text" id="floatingInput" class="form-control" v-model="newExpense.type" required>
+            <label for="floatingInput">Tipo:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" id="amount" class="form-control" v-model="newExpense.amount" required>
+            <label for="amount">Monto:</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" id="description" class="form-control" v-model="newExpense.description">
+            <label for="description">Descripción:</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success">Agregar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal Editar Gasto -->
 <div class="modal fade" id="modalEditarGasto" tabindex="-1" aria-labelledby="modalEditarGastoLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -111,23 +125,50 @@
     </div>
   </div>
 </div>
-<!--
-    <div class="col-12">
-      <form v-if="editedExpense._id" @submit.prevent="saveExpense">
-        <h2>Editar gasto</h2>
-        <input type="hidden" v-model="editedExpense._id">
-        <label for="edited-type">Tipo:</label>
-        <input type="text" id="edited-type" v-model="editedExpense.type" required>
-        <label for="edited-amount">Monto:</label>
-        <input type="number" id="edited-amount" v-model="editedExpense.amount" required>
-        <label for="edited-description">Descripción:</label>
-        <input type="text" id="edited-description" v-model="editedExpense.description">
-        <button type="submit">Actualizar</button>
-      </form>
+  
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-4 d-flex justify-content-center py-2">
+        <div>
+          <h3>Contactame!</h3>
+          <ul class="list-inline">
+            <li>
+              <a href="https://www.facebook.com/juanmanuel.francoesquivel" target="_blank">
+                <?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M17 2h-3a5 5 0 00-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/JuanMan49134686" target="_blank">
+                <?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M23 3.01s-2.018 1.192-3.14 1.53a4.48 4.48 0 00-7.86 3v1a10.66 10.66 0 01-9-4.53s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.278-.028-.556-.08-.83C21.94 5.674 23 3.01 23 3.01z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/jmanefranco.x/" target="_blank">
+                <?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M12 16a4 4 0 100-8 4 4 0 000 8z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8a5 5 0 015-5h8a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5z" stroke="#000000" stroke-width="1.5"></path><path d="M17.5 6.51l.01-.011" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:manuelfrancoesquivel@gmail.com?Subject=Hola%20vengo%20desde%20tu%20app%20gestión%20de%20gastos" target="_blank">
+                <?xml version="1.0" encoding="UTF-8"?><svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M7 9l5 3.5L17 9" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 17V7a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2z" stroke="#000000" stroke-width="1.5"></path></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-md-8 py-2">
+        <h3 class="text-center">Controla tus gastos con GastosApp</h3>
+        <p class="text-center">GastosApp es una aplicación web diseñada por <i class="fw-500">Juan Manuel Franco Esquivel</i> para ayudarte a llevar un registro sencillo y eficiente 
+          de tus gastos personales. Con esta herramienta podrás añadir ingresos y gastos, y ver fácilmente un resumen de 
+          tu situación financiera.¡No esperes más para tener un mayor control de una forma fácil con GastosApp!</p>
+      </div>
+      <hr>
+      <div class="col-12 d-flex justify-content-center">
+        <p>&copy; 2023. Todos los derechos reservados.</p>
+      </div>
     </div>
--->
   </div>
-</div>
+</footer>
 <script src="https://unpkg.com/vue@next"></script>
 <script src="https://unpkg.com/pouchdb@7.2.2/dist/pouchdb.min.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
