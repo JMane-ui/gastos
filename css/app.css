@@ -1,0 +1,58 @@
+/*
+#F6F7EB #light
+#E94F37 #naranja
+#393E41 #negro
+#3F88C5 #azul
+#44BBA4 #verde
+*/
+/*
+:root{
+    --color-light: #F6F7EB;
+    --color-orange: #E94F37;
+    --color-black: #393E41;
+    --color-blue: #3F88C5;
+    --color-green: #44BBA4;
+}
+*/
+* {
+    font-family: 'Kanit' !important;
+    /*font-weight: 400;
+    color: var(--color-light);*/
+}
+
+:root {
+    --bs-blue: #3F88C5 !important;
+    --bs-red: #E94F37 !important;
+    --bs-yellow: #efcf6e !important;
+    --bs-green: #44BBA4 !important;
+    --bs-black: #393E41 !important;
+    --bs-primary: #3F88C5 !important;
+    --bs-success: #44BBA4 !important;
+    --bs-warning: #efcf6e !important;
+    --bs-danger: #E94F37 !important;
+    --bs-dark: #393E41 !important;
+    --bs-body-color: #393E41 !important;
+    --bs-primary-rgb: 63,136,197 !important;
+    
+    --bs-border-radius: 0.375rem;
+    --bs-border-radius-sm: 0.25rem;
+    --bs-border-radius-lg: 0.5rem;
+    --bs-border-radius-xl: 1rem;
+    --bs-border-radius-2xl: 2rem;
+    --bs-border-radius-pill: 50rem;
+}
+
+.btn-success {
+    background: var(--bs-green) !important;
+    border: 0 !important;
+}
+
+.btn-warning {
+    background: var(--bs-yellow) !important;
+    border: 0 !important;
+}
+
+.btn-danger {
+    background: var(--bs-red) !important;
+    border: 0 !important;
+}
